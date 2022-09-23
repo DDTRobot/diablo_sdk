@@ -23,7 +23,7 @@
 
 ## Dependencies 
 
-- [ubuntu mate 20.04](https://ubuntu-mate.org/download/armhf/focal/thanks/?method=torrent)
+- [ubuntu mate 20.04](https://ubuntu-mate.org/download/)
 
 - [ros noetic](http://wiki.ros.org/noetic/Installation/Ubuntu)
 
