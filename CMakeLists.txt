@@ -59,8 +59,8 @@ if (WITH_ROS)
     )
 
     catkin_package(
-        #  INCLUDE_DIRS include
-        #  LIBRARIES
+        INCLUDE_DIRS include
+        LIBRARIES ${library_name}
         CATKIN_DEPENDS
         message_runtime
 		# DEPENDS system_lib
