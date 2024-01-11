@@ -339,6 +339,8 @@ uint8_t Movement_Ctrl::SendTransformDownCmd()
 
     transform_data.transform_down = 1;
     transform_data.transform_up = 0;
+    transform_data.jump = 0;
+    transform_data.automation = 0;
     Header header;
     header.data.LEN = sizeof(OSDK_Uart_Header_t) + 
         sizeof(OSDK_Transform_Cmd_t) + OSDK_MISC_SIZE;
