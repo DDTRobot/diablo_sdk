@@ -5,10 +5,10 @@
 DIABLO::OSDK::Movement_Ctrl* pMovementCtrl;
 
 void teleop_ctrl(const std_msgs::String::ConstPtr& msg)
-{
+{   
     if(!pMovementCtrl->in_control())
     {
-        printf("to get movement ctrl.\n");
+        printf("Try to get the control of robot movement!.\n");
         uint8_t result = pMovementCtrl->obtain_control();
         return;
     }
@@ -21,76 +21,91 @@ void teleop_ctrl(const std_msgs::String::ConstPtr& msg)
         switch(c)
         {
             case 'w':
-                pMovementCtrl->ctrl_data.forward = 1.0f;                // vel ctrl
+                pMovementCtrl->ctrl_data.forward =  1.0f;                // vel ctrl
                 break;
             case 'a':
-                pMovementCtrl->ctrl_data.left = 1.0f;                   // angular_vel ctrl
+                pMovementCtrl->ctrl_data.left =     1.0f;                   // angular_vel ctrl
                 break;
             case 's':
                 pMovementCtrl->ctrl_data.forward = -1.0f;               // vel ctrl
                 break;
             case 'd':
-                pMovementCtrl->ctrl_data.left = -1.0f;                  // angular_vel ctrl
+                pMovementCtrl->ctrl_data.left =    -1.0f;                  // angular_vel ctrl
                 break;
             case 'q':
-                pMovementCtrl->ctrl_data.roll = -0.1f;                  // pos ctrl
+                pMovementCtrl->ctrl_data.roll =    -0.1f;                  // pos ctrl
                 break;
             case 'e':
-                pMovementCtrl->ctrl_data.roll = 0.1f;                   // pos ctrl
+                pMovementCtrl->ctrl_data.roll =     0.1f;                   // pos ctrl
                 break;
             case 'r':
-                pMovementCtrl->ctrl_data.roll = 0.0f;                   // pos ctrl
+                pMovementCtrl->ctrl_data.roll =     0.0f;                   // pos ctrl
                 break;
-            case 'z':
-                pMovementCtrl->SendTransformDownCmd();
-                return;
-                break;
-            case 'v':
-                pMovementCtrl->SendTransformUpCmd();
-                return;
-                break;
-            case 'n':
-                pMovementCtrl->ctrl_mode_data.height_ctrl_mode = 0;      // vel ctrl mode 
-                pMovementCtrl->ctrl_mode_cmd = true;
-                break;
-            case 'm':
-                pMovementCtrl->ctrl_mode_data.height_ctrl_mode = 1;      // pos ctrl mode
-                pMovementCtrl->ctrl_mode_cmd = true;
-                break;
-            case 'f':
-                pMovementCtrl->ctrl_data.up = 0.0f;                     //pos & angular_vel ctrl
-                break;
-            case 'g':
-                pMovementCtrl->ctrl_data.up = 0.5f;                     //pos ctrl
-                break;
+
             case 'h':
-                pMovementCtrl->ctrl_data.up = 1.0f;                     //pos ctrl
+                pMovementCtrl->ctrl_data.up =      -0.5f;
                 break;
-            case 'x':
-                pMovementCtrl->ctrl_data.up = -0.1f;                    // vel ctrl
+            case 'j':
+                pMovementCtrl->ctrl_data.up =       1.0f;
                 break;
-            case 'c':
-                pMovementCtrl->ctrl_data.up = 0.1f;                     // vel ctrl
+            case 'k':
+                pMovementCtrl->ctrl_data.up =       0.5f;
                 break;
-            case 'y':
-                pMovementCtrl->ctrl_mode_data.pitch_ctrl_mode = 0;      // angular_vel ctrl mode
-                pMovementCtrl->ctrl_mode_cmd = true;
+            case 'l':
+                pMovementCtrl->ctrl_data.up =       0.0f;
                 break;
+
             case 'u':
-                pMovementCtrl->ctrl_mode_data.pitch_ctrl_mode = 1;      // pos ctrl mode
-                pMovementCtrl->ctrl_mode_cmd = true;
+                pMovementCtrl->ctrl_data.pitch =    0.5f;
                 break;
             case 'i':
-                pMovementCtrl->ctrl_data.pitch = -0.5f;                 // pos & angular_vel ctrl
+                pMovementCtrl->ctrl_data.pitch =    0.0f;
                 break;
             case 'o':
-                pMovementCtrl->ctrl_data.pitch = 0.0f;                  // pos & angular_vel ctrl
+                pMovementCtrl->ctrl_data.pitch =   -0.5f;
                 break;
-            case 'p':
-                pMovementCtrl->ctrl_data.pitch = 0.5f;                  // pos & angular_vel ctrl
+
+            case 'v':
+                pMovementCtrl->ctrl_mode_cmd = true;
+                pMovementCtrl->ctrl_mode_data.height_ctrl_mode = 1;
+                break;
+            case 'b':
+                pMovementCtrl->ctrl_mode_cmd = true;
+                pMovementCtrl->ctrl_mode_data.height_ctrl_mode = 0;
+                break;
+            case 'n':
+                pMovementCtrl->ctrl_mode_cmd = true;
+                pMovementCtrl->ctrl_mode_data.pitch_ctrl_mode  = 1;
+                break;
+            case 'm':
+                pMovementCtrl->ctrl_mode_cmd = true;
+                pMovementCtrl->ctrl_mode_data.pitch_ctrl_mode  = 0;
+                break;
+            
+            case 'z':
+                pMovementCtrl->SendTransformUpCmd();
+                pMovementCtrl->ctrl_data.up = 1.0f;
+                break;
+            case 'x':
+                pMovementCtrl->ctrl_mode_cmd = true;
+                pMovementCtrl->SendTransformDownCmd();
+                break;
+            case 'c':
+                pMovementCtrl->ctrl_mode_cmd = true;
+                pMovementCtrl->SendJumpCmd(true);
+				sleep(1); //wait for jump charge!
+                break;        
+            case 'f':
+                pMovementCtrl->ctrl_mode_cmd = true;
+                pMovementCtrl->SendDanceCmd(true);
+                break;
+            case 'g':
+                pMovementCtrl->ctrl_mode_cmd = true;
+                pMovementCtrl->SendDanceCmd(false);
                 break;
             default:
-                break;
+                pMovementCtrl->ctrl_mode_cmd = false;
+                pMovementCtrl->SendJumpCmd(false);
         }
     }
 
