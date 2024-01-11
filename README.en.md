@@ -44,15 +44,11 @@ git clone https://github.com/Direcrt-Drive-Technology/diablo-sdk-v1.git
 
 cd ~/catkin_ws
 catkin_make
+
+
+# Example
 source devel/setup.bash && rosrun diablo_sdk status_update_and_ctrl_example
 ```
-
-
-
-## Example 
-
-- [status_update_and_ctrl](https://github.com/Direcrt-Drive-Technology/diablo-sdk-v1/tree/master/example/movement_ctrl)
-
 
 
 
