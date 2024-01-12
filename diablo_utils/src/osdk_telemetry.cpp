@@ -218,7 +218,7 @@ uint8_t Telemetry::connection_check()
     uint16_t ack = -1;
     uint8_t disconnect_cnt = 0;
     uint8_t result = 0;
-    while(ack != SDK_CONNECTED && disconnect_cnt < 10)
+    while(ack != SDK_CONNECTED && disconnect_cnt < 1000)
     {
         result = vehicle->hal->serialSend_ack(header.data, ack,
         OSDK_INIT_SET, OSDK_CONNECTION_CHECK_ID,
@@ -227,7 +227,7 @@ uint8_t Telemetry::connection_check()
         disconnect_cnt += 1;
         usleep(5000);
     }
-    if(disconnect_cnt > 10)
+    if(disconnect_cnt > 1000)
     {
         SerialDisconnectHandle();
         if(cnt_thd)
@@ -266,7 +266,7 @@ void Telemetry::SerialHandle(void)
         if(flag == NULL)
         {
             this->status.robot_mode = OSDK_ROBOT_STATE_DISCONNECT;
-            this->SerialDisconnectHandle();
+            //this->SerialDisconnectHandle();
             continue;
         }
 

@@ -44,14 +44,12 @@ git clone https://github.com/DDTRobot/diablo-sdk-v1.git
 
 cd ~/catkin_ws
 catkin_make
+
+#Example
+
+source devel/setup.bash && rosrun diablo_sdk status_update_and_ctrl_example
 ```
 
-
-
-## Example 使用例程
-
-- [机器人控制](https://github.com/DDTRobot/diablo_sdk/tree/main/example/movement_ctrl)
-- [机器人状态读取](https://github.com/DDTRobot/diablo_sdk/tree/main/example/robot_status)
 
 
 

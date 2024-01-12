@@ -14,6 +14,8 @@ uint8_t Vehicle::init(void)
         std::cerr<<"Failed to allocate memory for Movement_Ctrl!\n"<<std::endl;
         return 1;
     }
+
+
     telemetry = new Telemetry(this);
     if(!telemetry)
     {
